@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Button, ErrorNote, Field, Input } from '../components/ui';
+import { InstallHint } from '../components/InstallCard';
 
 const TAGLINE = 'Un petit pas par jour, dans chaque domaine de ta vie.';
 
@@ -58,6 +59,7 @@ export default function Auth() {
 
       <div className="relative max-h-[78%] w-full shrink-0 overflow-y-auto rounded-t-[1.25rem] bg-white text-[#1c1213] shadow-[0_-8px_30px_rgba(28,18,19,0.3)] md:max-h-none md:max-w-[22rem] md:overflow-visible md:rounded-[1.25rem] md:border md:border-[#ecdcdc] md:shadow-none">
         <form onSubmit={submit} className="space-y-3 px-6 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-5 md:p-8">
+          <InstallHint />
           {mode === 'signup' && <h2 className="font-display text-2xl font-extrabold">Commencer</h2>}
           {mode === 'signup' && (
             <Field label="Ton prénom"><Input value={form.name} onChange={set('name')} required autoComplete="given-name" /></Field>

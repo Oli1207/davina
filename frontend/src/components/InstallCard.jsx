@@ -67,6 +67,27 @@ export default function InstallCard({ always = false }) {
   );
 }
 
+/** Sur l'écran de connexion, iPhone : installer AVANT de se connecter évite une deuxième connexion. */
+export function InstallHint() {
+  const [open, setOpen] = useState(false);
+  if (!isIos() || isStandalone()) return null;
+  return (
+    <>
+      <div className="mb-3 flex items-start gap-3 rounded-[0.5rem] bg-[#fdeaec] p-3 text-sm text-[#1c1213]">
+        <Smartphone className="mt-0.5 h-5 w-5 shrink-0 text-[#c8102e]" />
+        <div className="min-w-0 flex-1">
+          <p><b>Sur iPhone, installe Davina avant de te connecter</b> : sinon tu devras te connecter deux fois.</p>
+          <button type="button" className="mt-1 min-h-11 font-semibold text-[#c8102e] underline" onClick={() => setOpen(true)}>Comment faire ?</button>
+        </div>
+      </div>
+      <Sheet open={open} onClose={() => setOpen(false)} title="Installer Davina">
+        <IosSteps />
+        <Button size="lg" className="mt-4 w-full" onClick={() => setOpen(false)}>J'ai compris</Button>
+      </Sheet>
+    </>
+  );
+}
+
 function Step({ n, icon: Icon, children }) {
   return (
     <li className="flex gap-3">
@@ -85,8 +106,9 @@ function IosSteps() {
         <Step n={1} icon={Share}>Touche le bouton <b>Partager</b> (le carré avec une flèche vers le haut), en bas de l'écran.</Step>
         <Step n={2} icon={SquarePlus}>Fais défiler et touche <b>« Sur l'écran d'accueil »</b>.</Step>
         <Step n={3}>Touche <b>« Ajouter »</b> en haut à droite.</Step>
-        <Step n={4}>Ferme Safari et <b>ouvre Davina depuis son icône</b> sur ton écran d'accueil. Elle te proposera alors d'activer les rappels.</Step>
+        <Step n={4}>Ferme Safari et <b>ouvre Davina depuis son icône</b> sur ton écran d'accueil. <b>Connecte-toi (ou crée ton compte) à l'intérieur</b>, puis active les rappels.</Step>
       </ol>
+      <p className="rounded-sm bg-rouge-soft px-3 py-2 text-sm"><b>Pourquoi se connecter dans l'app ?</b> Sur iPhone, l'app installée et Safari ne partagent pas la connexion. Installer d'abord, c'est se connecter une seule fois. Si tu t'es déjà connectée dans Safari, reconnecte-toi une fois dans l'app.</p>
       <p className="text-sm text-muted">Si tu ne vois pas « Sur l'écran d'accueil », ouvre l'adresse dans Safari, ou mets ton iPhone à jour (iOS 16.4 ou plus pour les rappels).</p>
     </div>
   );
