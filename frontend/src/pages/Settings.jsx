@@ -9,6 +9,7 @@ import { currentSubscription, pushSupport, subscribePush, unsubscribePush } from
 import { PageHeader } from '../components/Layout';
 import { toast } from '../components/toast';
 import { Button, Chips, Field, Input } from '../components/ui';
+import InstallCard from '../components/InstallCard';
 
 export default function Settings({ profile }) {
   const save = useSave('profiles');
@@ -45,6 +46,7 @@ export default function Settings({ profile }) {
       <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Menu</Link>
       <PageHeader title="Réglages" />
       <div className="space-y-5">
+        <InstallCard always />
         <Field label="Mon prénom">
           <Input value={name} onChange={(e) => setName(e.target.value)} onBlur={() => name.trim() !== profile.display_name && patch({ display_name: name.trim() })} autoComplete="given-name" />
         </Field>

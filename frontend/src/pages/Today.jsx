@@ -11,6 +11,7 @@ import { DOMAIN } from '../data/domains';
 import HabitSheet from '../components/HabitSheet';
 import EveningCard from '../components/EveningCard';
 import WordCard from '../components/WordCard';
+import InstallCard from '../components/InstallCard';
 import Soleil from '../components/Soleil';
 import { PageHeader } from '../components/Layout';
 import { Button, Card, Empty, Gauge, IconButton, Loading, Scale, SectionTitle, Sheet } from '../components/ui';
@@ -75,6 +76,8 @@ export default function Today() {
         title={`${greeting()}${profile?.display_name ? `, ${profile.display_name}` : ''}`}
         action={<Link to="/plus" aria-label="Menu : roue, journal, binôme, réglages…" className="inline-flex h-11 w-11 items-center justify-center rounded-sm text-muted hover:bg-paper-2"><LayoutGrid className="h-5 w-5" /></Link>}
       />
+
+      <InstallCard />
 
       {activeFast && <FastBanner fast={activeFast} />}
 

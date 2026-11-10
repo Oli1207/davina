@@ -8,10 +8,10 @@ export const GUIDE = [
     title: 'Bien démarrer (10 minutes, une seule fois)',
     intro: 'Ces réglages rendent tout le reste intelligent. Rien n\'est obligatoire : commence petit.',
     steps: [
-      ['Installe l\'app', 'Sur iPhone : Safari → Partager → « Sur l\'écran d\'accueil ». Sur Android : menu du navigateur → « Installer l\'application ». Ouvre-la ensuite depuis son icône.'],
+      ['Installe l\'app', 'Un bandeau rouge en haut de l\'écran Jour te guide. Sur iPhone : Safari → Partager → « Sur l\'écran d\'accueil » → Ajouter. Sur Android : menu ⋮ → « Installer l\'application ». Ouvre-la ensuite depuis son icône : c\'est la seule façon de recevoir les rappels sur iPhone.'],
       ['Choisis 3 domaines', 'À l\'accueil, prends les 3 domaines par lesquels tu veux commencer. Les 7 autres attendent : tu les réveilleras quand tu veux, dans la Roue.'],
       ['Garde une action par domaine', 'Chaque action a une version « 2 minutes ». Les jours difficiles, elle compte quand même : ta chaîne ne casse jamais.'],
-      ['Active le rappel', 'Menu (en haut de l\'écran Jour) → Réglages → Activer les notifications. Tu reçois un rappel le matin, et l\'heure exacte des actions auxquelles tu as mis une heure.'],
+      ['Active les rappels', 'Depuis l\'app installée, le bandeau rouge te propose « Activer les rappels » (aussi dans Menu → Réglages). Tu reçois un rappel le matin, et l\'heure exacte des actions auxquelles tu as mis une heure.'],
       ['Saisis ton emploi du temps', 'Menu → Mon emploi du temps : tes cours et engagements, une fois. Davina en déduit tes vrais créneaux libres.'],
     ],
     tips: ['Ne remplis pas tout d\'un coup. Trois actions suffisent pour commencer ; ajoute le reste quand ces trois sont devenues faciles.'],

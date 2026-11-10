@@ -6,6 +6,7 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import App from './App';
 import { persister, queryClient } from './lib/queryClient';
 import { applyTheme, usePrefs } from './store/prefs';
+import './lib/install';
 import './index.css';
 
 applyTheme(usePrefs.getState().theme);
