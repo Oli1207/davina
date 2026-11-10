@@ -1,0 +1,14 @@
+# Secrets locaux
+supabase/secrets.local.md
+.env
+.env.local
+node_modules
+supabase/*.local.md
+supabase/*.local.sql
+
+# Fichier de clés de l'utilisateur : ne jamais publier
+mdp.txt
+mdp*.txt
+
+# Config locale de l'éditeur
+.claude/

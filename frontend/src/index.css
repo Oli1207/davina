@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Davina — rouge et blanc.
+
+   Aplats de couleur, aucun dégradé, filets fins plutôt qu'ombres portées.
+   Le rouge est réservé à l'action principale et à ce qui est « fait » ;
+   tout le reste est blanc, encre et gris chaud. Les domaines se reconnaissent
+   à leur icône et à leur nom, jamais à une couleur.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/bricolage.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/dm-sans.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root,
+[data-theme='light'] {
+  --sky: #ffffff;            /* fond de page */
+  --paper: #ffffff;
+  --paper-2: #fbf3f2;        /* blanc rosé : survol, zones douces */
+  --ink: #1c1213;
+  --muted: #6f5f61;
+  --line: #ecdcdc;
+  --line-strong: #1c1213;
+  --rouge: #c8102e;
+  --rouge-soft: #fdeaec;
+  --on-ink: #ffffff;
+  --white: #ffffff;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --sky: #170d0e;
+  --paper: #211416;
+  --paper-2: #2b1a1c;
+  --ink: #f8eeee;
+  --muted: #b9a3a5;
+  --line: #3f2a2c;
+  --line-strong: #f8eeee;
+  --rouge: #ee4258;
+  --rouge-soft: #3f1a20;
+  --on-ink: #170d0e;
+  --white: #ffffff;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-sky: var(--sky);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-rouge: var(--rouge);
+  --color-rouge-soft: var(--rouge-soft);
+  --color-on-ink: var(--on-ink);
+  --font-display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius: 10px;
+}
+
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .display { font-family: var(--font-display); letter-spacing: -0.02em; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ─── Surfaces ────────────────────────────────────────────────────────────── */
+
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+.ink-block { background: var(--ink); color: var(--on-ink); border-radius: var(--radius); }
+.red-block { background: var(--rouge); color: #fff; border-radius: var(--radius); }
+
+/* ─── Boutons ─────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  transition: background-color .15s, color .15s, border-color .15s, transform .1s;
+  white-space: nowrap;
+  user-select: none;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .5; pointer-events: none; }
+.btn-sm { min-height: 2.75rem; padding: 0 .9rem; font-size: .9rem; }
+.btn-md { min-height: 2.9rem; padding: 0 1.1rem; font-size: .95rem; }
+.btn-lg { min-height: 3.4rem; padding: 0 1.4rem; font-size: 1.02rem; }
+.btn-primary { background: var(--rouge); color: #fff; }
+.btn-primary:hover { background: color-mix(in srgb, var(--rouge) 88%, black); }
+.btn-ink { background: var(--ink); color: var(--on-ink); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { background: var(--paper-2); }
+.btn-ghost { background: transparent; color: var(--muted); }
+.btn-ghost:hover { color: var(--ink); background: var(--paper-2); }
+.btn-danger { background: transparent; color: var(--rouge); border-color: var(--rouge); }
+
+/* ─── Champs ──────────────────────────────────────────────────────────────── */
+
+.field-label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-bottom: .3rem; text-transform: uppercase; letter-spacing: .04em; }
+.input {
+  width: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: .7rem .8rem;
+  font-size: 16px; /* évite le zoom automatique d'iOS */
+  outline: none;
+}
+.input:focus { border-color: var(--rouge); }
+textarea.input { min-height: 5.5rem; resize: vertical; line-height: 1.45; }
+
+/* ─── Onglets, pastilles ──────────────────────────────────────────────────── */
+
+.tabs { display: flex; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0; padding: .75rem .9rem; font-weight: 600; font-size: .92rem; color: var(--muted);
+  border-bottom: 3px solid transparent; margin-bottom: -1px; min-height: 2.75rem;
+}
+.tab[aria-selected='true'] { color: var(--ink); border-bottom-color: var(--rouge); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: .3rem;
+  min-height: 2.25rem; padding: .25rem .7rem; font-size: .82rem; font-weight: 600;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--paper);
+}
+.chip[aria-pressed='true'] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
+
+/* Case à cocher ronde : vide, « 2 minutes » (rouge clair) ou faite (rouge plein). */
+.check {
+  width: 2.75rem; height: 2.75rem; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--line-strong); border-radius: 50%;
+  transition: background-color .15s, border-color .15s;
+}
+.check[data-state='full'] { background: var(--rouge); border-color: var(--rouge); color: #fff; }
+.check[data-state='min']  { background: var(--rouge-soft); border-color: var(--rouge); color: var(--rouge); }
+
+.safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 6rem); }
+
+@keyframes sheet-in { from { transform: translateY(100%); } to { transform: none; } }
+.sheet-in { animation: sheet-in .22s ease-out; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade-in { animation: fade-in .25s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
