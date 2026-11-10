@@ -41,21 +41,22 @@ export default function Auth() {
   };
 
   return (
-    <div className="relative flex min-h-[100svh] flex-col justify-end bg-[#1c1213] md:items-center md:justify-center md:p-10 lg:items-end lg:pr-[4vw]">
-      {/* Sa photo en plein écran, derrière tout. Cadrage sur le visage. */}
-      <img
-        src="/images/accueil.jpg"
-        alt=""
-        className="fixed inset-0 h-full w-full object-cover object-[50%_25%]"
-        fetchPriority="high"
-      />
+    // Mobile : la page remplit exactement la zone visible (fixed inset-0), sans dépendre de svh/dvh
+    // qui se trompent dans certains navigateurs intégrés. La photo prend tout l'espace au-dessus du
+    // formulaire, qui reste collé en bas : le visage n'est jamais masqué.
+    // Grand écran : la photo portrait occupe sa moitié gauche, entière.
+    <div className="fixed inset-0 flex flex-col bg-[#1c1213] md:static md:ml-[45%] md:min-h-[100svh] md:items-center md:justify-center md:bg-white md:p-10">
+      <div className="relative min-h-0 flex-1 md:hidden">
+        <img src="/images/accueil.jpg" alt="" className="absolute inset-0 h-full w-full object-cover object-[50%_36%]" fetchPriority="high" />
+      </div>
+      <img src="/images/accueil.jpg" alt="" className="fixed inset-y-0 left-0 hidden h-full w-[45%] object-cover object-[50%_20%] md:block" />
 
       <div className="fixed left-5 top-[calc(env(safe-area-inset-top)+1rem)] md:left-8 md:top-7" style={{ textShadow: '0 1px 10px rgba(28,18,19,0.7)' }}>
         <h1 className="font-display text-2xl font-extrabold tracking-tight text-white">Davina</h1>
         <p className="mt-0.5 max-w-[16rem] text-sm font-medium text-white/95">{TAGLINE}</p>
       </div>
 
-      <div className="relative w-full rounded-t-[1.25rem] bg-white text-[#1c1213] shadow-[0_-8px_30px_rgba(28,18,19,0.3)] md:max-w-[22rem] md:rounded-[1.25rem]">
+      <div className="relative max-h-[78%] w-full shrink-0 overflow-y-auto rounded-t-[1.25rem] bg-white text-[#1c1213] shadow-[0_-8px_30px_rgba(28,18,19,0.3)] md:max-h-none md:max-w-[22rem] md:overflow-visible md:rounded-[1.25rem] md:border md:border-[#ecdcdc] md:shadow-none">
         <form onSubmit={submit} className="space-y-3 px-6 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-5 md:p-8">
           {mode === 'signup' && <h2 className="font-display text-2xl font-extrabold">Commencer</h2>}
           {mode === 'signup' && (
