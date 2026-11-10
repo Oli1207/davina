@@ -7,7 +7,7 @@ import { useUserDomains } from '../hooks/useLife';
 import { wheelAverage } from '../lib/engine';
 import { today } from '../lib/dates';
 import { DOMAINS } from '../data/domains';
-import { PageHeader } from '../components/Layout';
+import Head from '../components/Head';
 import { toast } from '../components/toast';
 import { Button, Loading, Sheet } from '../components/ui';
 
@@ -39,7 +39,7 @@ function Radar({ scores }) {
   );
 }
 
-export default function Wheel() {
+export default function Wheel({ embedded }) {
   const { data: rows = [], isLoading } = useUserDomains();
   const [open, setOpen] = useState(false);
   const by = Object.fromEntries(rows.map((r) => [r.domain, r]));
@@ -49,7 +49,7 @@ export default function Wheel() {
   if (isLoading) return <Loading />;
   return (
     <>
-      <PageHeader
+      <Head embedded={embedded} back={null}
         help="roue" title="Ma roue de vie"
         sub={avg ? `Moyenne : ${avg}/10. Touche un domaine pour l'ouvrir.` : 'Donne une note à chaque domaine pour voir ton équilibre.'}
         action={<Button variant="secondary" size="sm" icon={SlidersHorizontal} onClick={() => setOpen(true)}>Faire le point</Button>}

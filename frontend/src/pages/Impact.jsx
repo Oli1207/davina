@@ -4,7 +4,7 @@ import { ChevronLeft, Plus } from 'lucide-react';
 import { useRemove, useRows, useSave } from '../hooks/useData';
 import { useJourneys } from '../hooks/useJourneys';
 import { shortDate, today } from '../lib/dates';
-import { PageHeader } from '../components/Layout';
+import Head from '../components/Head';
 import { toast } from '../components/toast';
 import { useAsk } from '../components/confirm';
 import { Button, Chips, Empty, ErrorNote, Field, Input, Loading, Sheet, Textarea } from '../components/ui';
@@ -13,7 +13,7 @@ const KINDS = [['competence', 'Compétence apprise'], ['projet', 'Projet lancé'
 const LABEL = Object.fromEntries(KINDS);
 
 /** Impact : on mesure des personnes qui progressent, pas des abonnés ni des vues. */
-export default function Impact() {
+export default function Impact({ embedded }) {
   const { data: logs = [], isLoading } = useRows('impact_logs', { build: (q) => q.order('day', { ascending: false }).order('created_at', { ascending: false }).limit(200) });
   const [sheet, setSheet] = useState(null);
   const totals = useMemo(() => Object.fromEntries(KINDS.map(([k]) => [k, logs.filter((l) => l.kind === k).reduce((n, l) => n + l.people, 0)])), [logs]);
@@ -21,8 +21,7 @@ export default function Impact() {
   if (isLoading) return <Loading />;
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
-      <PageHeader title="Mon impact" sub="Des personnes qui acquièrent des compétences, créent des projets, améliorent leur environnement." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Ajouter</Button>} />
+      <Head embedded={embedded} title="Mon impact" sub="Des personnes qui acquièrent des compétences, créent des projets, améliorent leur environnement." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Ajouter</Button>} />
       <section className="mb-5 grid grid-cols-3 gap-2">
         {KINDS.map(([k, l]) => (
           <div key={k} className="card p-3"><p className="font-display text-3xl font-extrabold num text-rouge">{totals[k]}</p><p className="text-xs text-muted">personnes : {l.toLowerCase()}</p></div>

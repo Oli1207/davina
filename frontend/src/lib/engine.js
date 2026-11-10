@@ -102,9 +102,12 @@ function dueDays(habit, from, to, planned = []) {
 /** Pour une semaine : fait / attendu, et pour les rendez-vous à heure fixe la part à l'heure. */
 export function weekProgress(habit, checkins, monday, until = today()) {
   const end = addDays(monday, 6) < until ? addDays(monday, 6) : until;
-  const done = checkins.filter((c) => c.habit_id === habit.id && c.day >= monday && c.day <= addDays(monday, 6));
+  const mine = checkins.filter((c) => c.habit_id === habit.id && c.day >= monday && c.day <= addDays(monday, 6));
+  const done = mine.filter((c) => c.level === 'full' || c.level === 'min');
+  // Les jours de repos (maladie, voyage) sont dispensés : ils sortent de l'objectif.
+  const rest = mine.filter((c) => c.level === 'rest').length;
   if (isWeekly(habit)) return { done: done.length, target: habit.per_week, min: habit.per_week_min || habit.per_week };
-  const target = dueDays(habit, monday, addDays(monday, 6)).length;
+  const target = Math.max(0, dueDays(habit, monday, addDays(monday, 6)).length - rest);
   const onTime = habit.at_time ? done.filter((c) => c.level === 'full' && (c.late_min ?? 0) <= (habit.grace_min ?? 15)).length : null;
   return { done: done.length, target, elapsed: dueDays(habit, monday, end).length, onTime };
 }
@@ -113,9 +116,10 @@ export function weekProgress(habit, checkins, monday, until = today()) {
 export function fidelity(habit, checkins, days = 14) {
   const end = addDays(today(), -1);
   const from = addDays(end, -(days - 1));
-  const due = dueDays(habit, from, end);
+  const excused = new Set(checkins.filter((c) => c.habit_id === habit.id && c.level === 'rest').map((c) => c.day));
+  const due = dueDays(habit, from, end).filter((d) => !excused.has(d));
   if (!due.length) return null;
-  const mine = checkins.filter((c) => c.habit_id === habit.id && due.includes(c.day));
+  const mine = checkins.filter((c) => c.habit_id === habit.id && due.includes(c.day) && (c.level === 'full' || c.level === 'min'));
   const onTime = mine.filter((c) => c.level === 'full' && (c.late_min ?? 0) <= (habit.grace_min ?? 15)).length;
   return { due: due.length, kept: mine.length, onTime, rate: mine.length / due.length, onTimeRate: onTime / due.length };
 }

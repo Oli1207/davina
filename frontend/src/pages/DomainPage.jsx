@@ -24,14 +24,14 @@ export default function DomainPage() {
 
   useEffect(() => { setVision(row?.vision || ''); }, [row?.vision]);
 
-  if (!meta) return <Navigate to="/roue" replace />;
+  if (!meta) return <Navigate to="/semaine?onglet=roue" replace />;
   if (isLoading) return <Loading />;
 
   const patch = (fields, msg) => save.mutate({ domain: key, ...fields }, { onSuccess: () => msg && toast(msg) });
 
   return (
     <>
-      <Link to="/roue" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Roue</Link>
+      <Link to="/semaine?onglet=roue" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Roue</Link>
       <PageHeader title={meta.name} sub={meta.about} />
 
       <section className="card mb-4 p-4">

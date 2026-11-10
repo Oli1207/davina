@@ -25,7 +25,7 @@ Dans le menu de gauche, ouvre **SQL Editor** puis *New query*.
    Le résultat attendu est *Success. No rows returned*.
 
 2. Ouvre une nouvelle requête, colle `supabase/migrations/02_modules.sql` (cartes, terrain, mentors, impact), puis **Run**.
-3. Fais de même, un fichier à la fois et dans l'ordre : `03_esprit.sql` (méditation, prière, jeûne, intercession), `04_corps.sql`, `05_etudes.sql`, `06_etudes2.sql`, `07_organisation.sql` (rendez-vous à heure fixe, emploi du temps). `99_rappels.sql` se lance en dernier, à l'étape 6.
+3. Fais de même, un fichier à la fois et dans l'ordre : `03_esprit.sql` (méditation, prière, jeûne, intercession), `04_corps.sql`, `05_etudes.sql`, `06_etudes2.sql`, `07_organisation.sql` (rendez-vous à heure fixe, emploi du temps), `08_interface.sql` (pointage « manqué » et « repos », jour léger). `99_rappels.sql` se lance en dernier, à l'étape 6.
 
 Va ensuite dans **Table Editor** : les tables `habits`, `checkins`, `entries`, `pairs`, `cards`, etc. doivent
 apparaître, toutes marquées *RLS enabled*.

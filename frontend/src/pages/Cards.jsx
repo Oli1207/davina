@@ -23,7 +23,7 @@ export default function Cards() {
   if (isLoading) return <Loading />;
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
+      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Menu</Link>
       <PageHeader title="Cartes de révision" sub="Un mot ou une idée revient juste avant que tu l'oublies." action={<Button size="sm" icon={Plus} onClick={() => setAdding(true)}>Carte</Button>} />
       <Tabs tabs={[['revise', `À réviser (${due.length})`], ['all', `Mes cartes (${cards.length})`]]} value={tab} onChange={setTab} />
       <div className="mt-4">

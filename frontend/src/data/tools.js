@@ -12,9 +12,9 @@ export const TOOLS = [
   { domain: 'expression', to: '/etudes?onglet=contenu', icon: Lightbulb, title: 'Création de contenu', sub: 'Idées, pipeline, micro-créneaux de 15 minutes' },
   { domain: 'savoir', to: '/lecture', icon: BookOpen, title: 'Mes lectures', sub: 'Mes livres, mes pages, mes fiches de synthèse' },
   { domain: 'savoir', to: '/revision', icon: Layers, title: 'Cartes de révision', sub: 'Vocabulaire, versets, idées : je révise au bon moment' },
-  { domain: 'mission', to: '/terrain', icon: MapPinned, title: 'Carnet de terrain', sub: 'Mes rencontres : problèmes observés, solutions locales' },
-  { domain: 'mission', to: '/impact', icon: Sprout, title: 'Mon impact', sub: 'Les personnes qui progressent grâce à mon action' },
-  { domain: 'relations', to: '/cercle', icon: UserRoundCheck, title: 'Mon cercle', sub: 'Mes mentors et mes contradicteurs' },
+  { domain: 'mission', to: '/service?onglet=terrain', icon: MapPinned, title: 'Carnet de terrain', sub: 'Mes rencontres : problèmes observés, solutions locales' },
+  { domain: 'mission', to: '/service?onglet=impact', icon: Sprout, title: 'Mon impact', sub: 'Les personnes qui progressent grâce à mon action' },
+  { domain: 'relations', to: '/service?onglet=cercle', icon: UserRoundCheck, title: 'Mon cercle', sub: 'Mes mentors et mes contradicteurs' },
 ];
 
 export const TOOLS_BY_DOMAIN = (key) => TOOLS.filter((t) => t.domain === key);

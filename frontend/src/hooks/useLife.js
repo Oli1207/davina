@@ -69,14 +69,15 @@ export function useToday() {
     const withState = (item) => (item.type === 'habit' ? { ...item, checkin: byHabit.get(item.habit.id) || null } : item);
     const timed = ag.timed.map(withState);
     const untimed = ag.untimed.map(withState);
-    const todo = [...timed, ...untimed].filter((i) => i.type === 'habit');
+    const todo = [...timed, ...untimed].filter((i) => i.type === 'habit' && i.checkin?.level !== 'rest');
     const monday = weekStart();
     const weekly = ag.weekly.map((h) => ({ habit: h, checkin: byHabit.get(h.id) || null, progress: weekProgress(h, rows, monday) }));
     return {
       timed, untimed, weekly,
-      done: todo.filter((i) => i.checkin).length,
+      done: todo.filter((i) => i.checkin && i.checkin.level !== 'miss').length,
       total: todo.length,
-      streak: streak(new Set(rows.map((r) => r.day)), day),
+      // Un jour de repos ne casse pas la série ; un jour « manqué » ne la prolonge pas.
+      streak: streak(new Set(rows.filter((r) => r.level !== 'miss').map((r) => r.day)), day),
     };
   }, [habits.data, checks.data, blocks.data, planned.data, day]);
 

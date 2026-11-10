@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, Plus } from 'lucide-react';
 import { useRemove, useRows, useSave } from '../hooks/useData';
 import { shortDate, today } from '../lib/dates';
-import { PageHeader } from '../components/Layout';
+import Head from '../components/Head';
 import { toast } from '../components/toast';
 import { useAsk } from '../components/confirm';
 import { Button, Empty, Field, Input, Loading, Sheet, Textarea } from '../components/ui';
@@ -11,15 +11,14 @@ import { Button, Empty, Field, Input, Loading, Sheet, Textarea } from '../compon
 const EMPTY = { day: '', place: '', who: '', problems: '', solutions: '', learned: '' };
 
 /** Carnet de terrain : écouter avant de parler. Des rôles et des lieux, jamais des noms. */
-export default function Terrain() {
+export default function Terrain({ embedded }) {
   const { data: notes = [], isLoading } = useRows('field_notes', { build: (q) => q.order('day', { ascending: false }).order('created_at', { ascending: false }).limit(100) });
   const [sheet, setSheet] = useState(null);
 
   if (isLoading) return <Loading />;
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
-      <PageHeader title="Carnet de terrain" sub="Écoute, observe, note. Ne dis pas aux gens ce qu'ils doivent penser." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Rencontre</Button>} />
+      <Head embedded={embedded} title="Carnet de terrain" sub="Écoute, observe, note. Ne dis pas aux gens ce qu'ils doivent penser." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Rencontre</Button>} />
       {notes.length === 0 ? (
         <Empty title="Aucune rencontre notée" action={<Button icon={Plus} onClick={() => setSheet({})}>Noter une rencontre</Button>}>
           Une journée avec un agriculteur, un échange avec un commerçant ou des étudiants : note les problèmes qui reviennent et les solutions déjà trouvées sur place.

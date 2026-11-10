@@ -26,7 +26,7 @@ export default function Schedule() {
 
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
+      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Menu</Link>
       <PageHeader title="Mon emploi du temps" sub="Cours, travail, engagements fixes. Saisis-les une fois." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Ajouter</Button>} />
 
       <section className="card mb-5 p-4">

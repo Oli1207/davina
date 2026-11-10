@@ -9,6 +9,8 @@ import { useRecentChecks } from '../hooks/useLife';
 import { autoPlace, dueOn, fidelity, freeSlots, isWeekly, sleepInsight, weekProgress } from '../lib/engine';
 import { addDays, capitalize, dayName, dayShort, hhmm, shortDate, today, toTime, weekDays, weekStart, weekday } from '../lib/dates';
 import { PageHeader } from '../components/Layout';
+import Wheel from './Wheel';
+import Journeys from './Journeys';
 import { toast } from '../components/toast';
 import { Button, Card, Empty, Field, Gauge, IconButton, Input, Loading, SectionTitle, Select, Sheet, Stat, Tabs, Textarea } from '../components/ui';
 
@@ -33,19 +35,21 @@ export default function Week() {
         help="semaine"
         title="Ma semaine"
         sub={`du ${shortDate(monday)} au ${shortDate(sunday)}`}
-        action={(
+        action={['progres', 'planning', 'bilan'].includes(tab) ? (
           <div className="flex">
             <IconButton icon={ChevronLeft} label="Semaine précédente" onClick={() => setMonday(addDays(monday, -7))} />
             <IconButton icon={ChevronRight} label="Semaine suivante" onClick={() => setMonday(addDays(monday, 7))} />
           </div>
-        )}
+        ) : undefined}
       />
-      {monday !== weekStart() && <button type="button" className="mb-3 min-h-11 text-sm font-semibold text-rouge" onClick={() => setMonday(weekStart())}>Revenir à cette semaine</button>}
-      <Tabs tabs={[['progres', 'Progrès'], ['planning', 'Planning'], ['bilan', 'Bilan']]} value={tab} onChange={(v) => setParams({ onglet: v }, { replace: true })} />
+      {monday !== weekStart() && ['progres', 'planning', 'bilan'].includes(tab) && <button type="button" className="mb-3 min-h-11 text-sm font-semibold text-rouge" onClick={() => setMonday(weekStart())}>Revenir à cette semaine</button>}
+      <Tabs tabs={[['progres', 'Progrès'], ['planning', 'Planning'], ['bilan', 'Bilan'], ['roue', 'Roue'], ['parcours', 'Parcours']]} value={tab} onChange={(v) => setParams({ onglet: v }, { replace: true })} />
       <div className="mt-5">
         {tab === 'progres' && <Progress {...ctx} />}
         {tab === 'planning' && <Planner {...ctx} />}
         {tab === 'bilan' && <Review {...ctx} />}
+        {tab === 'roue' && <Wheel embedded />}
+        {tab === 'parcours' && <Journeys embedded />}
       </div>
     </div>
   );

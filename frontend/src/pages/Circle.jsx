@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, Plus } from 'lucide-react';
 import { useRemove, useRows, useSave } from '../hooks/useData';
 import { diffDays, shortDate, today } from '../lib/dates';
-import { PageHeader } from '../components/Layout';
+import Head from '../components/Head';
 import { toast } from '../components/toast';
 import { useAsk } from '../components/confirm';
 import { Button, Chips, Empty, Field, Input, Loading, Sheet, Textarea } from '../components/ui';
@@ -12,7 +12,7 @@ const KINDS = [['mentor', 'Mentor'], ['contradicteur', 'Contradicteur']];
 const ROLES = ['Historien ou chercheur en sciences sociales', 'Économiste du développement', 'Entrepreneur', 'Pédagogue', 'Politiques publiques et institutions', 'Intellectuel africain'];
 
 /** Le cercle : des personnes qui me challengent, dont certaines ne sont pas d'accord avec moi. */
-export default function Circle() {
+export default function Circle({ embedded }) {
   const { data: people = [], isLoading } = useRows('mentors', { build: (q) => q.order('created_at') });
   const save = useSave('mentors');
   const [sheet, setSheet] = useState(null);
@@ -24,8 +24,7 @@ export default function Circle() {
 
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
-      <PageHeader title="Mon cercle" sub="Des mentors, mais aussi des personnes qui ne sont pas d'accord avec toi." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Ajouter</Button>} />
+      <Head embedded={embedded} title="Mon cercle" sub="Des mentors, mais aussi des personnes qui ne sont pas d'accord avec toi." action={<Button size="sm" icon={Plus} onClick={() => setSheet({})}>Ajouter</Button>} />
       {people.length > 0 && contradictors === 0 && (
         <p className="mb-4 rounded-sm border-l-4 border-rouge bg-rouge-soft px-3 py-2.5 text-sm">Ton cercle n'a encore aucun contradicteur. Cherche quelqu'un capable de te montrer où ton raisonnement est faux.</p>
       )}

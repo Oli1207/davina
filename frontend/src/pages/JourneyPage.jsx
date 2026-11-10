@@ -35,7 +35,7 @@ export default function JourneyPage() {
   const now = today();
 
   if (isLoading) return <Loading />;
-  if (isFetched && !journey) return <Navigate to="/parcours" replace />;
+  if (isFetched && !journey) return <Navigate to="/semaine?onglet=parcours" replace />;
 
   const steps = parts.steps.data || [];
   const dels = parts.deliverables.data || [];
@@ -53,7 +53,7 @@ export default function JourneyPage() {
 
   return (
     <>
-      <Link to="/parcours" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Parcours</Link>
+      <Link to="/semaine?onglet=parcours" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Parcours</Link>
       <PageHeader
         kicker={journey.status === 'done' ? 'Terminé' : journey.status === 'paused' ? 'En pause' : 'En cours'}
         title={journey.title}

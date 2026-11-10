@@ -19,7 +19,6 @@ export default function Etudes() {
   const go = (v) => setParams({ onglet: v }, { replace: true });
   return (
     <div>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
       <PageHeader kicker="Savoir" title="Études" sub="Avancer un peu chaque jour pour ne jamais être submergé." />
       <Tabs tabs={TABS} value={tab} onChange={go} />
       <div className="mt-5">

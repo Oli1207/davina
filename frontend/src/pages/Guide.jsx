@@ -14,7 +14,7 @@ export default function Guide() {
   const startTour = useTour((s) => s.start);
   return (
     <div>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
+      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Menu</Link>
       <PageHeader kicker="Didacticiel" title="Le guide de Davina" sub="Tout ce que l'app sait faire, et comment t'en servir." />
       <Button variant="secondary" icon={Play} className="mb-5 w-full sm:w-auto" onClick={startTour}>Refaire la visite guidée</Button>
       <div className="divide-y divide-line border-y border-line">

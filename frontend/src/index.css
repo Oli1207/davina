@@ -35,6 +35,7 @@
   --line-strong: #1c1213;
   --rouge: #c8102e;
   --rouge-soft: #fdeaec;
+  --rose: #ec8b9b;           /* le deuxième ton du « soleil » */
   --on-ink: #ffffff;
   --white: #ffffff;
   color-scheme: light;
@@ -50,6 +51,7 @@
   --line-strong: #f8eeee;
   --rouge: #ee4258;
   --rouge-soft: #3f1a20;
+  --rose: #a8434f;
   --on-ink: #170d0e;
   --white: #ffffff;
   color-scheme: dark;
@@ -65,6 +67,7 @@
   --color-line-strong: var(--line-strong);
   --color-rouge: var(--rouge);
   --color-rouge-soft: var(--rouge-soft);
+  --color-rose: var(--rose);
   --color-on-ink: var(--on-ink);
   --font-display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
   --font-sans: 'DM Sans', system-ui, sans-serif;
@@ -161,11 +164,15 @@ textarea.input { min-height: 5.5rem; resize: vertical; line-height: 1.45; }
 }
 .check[data-state='full'] { background: var(--rouge); border-color: var(--rouge); color: #fff; }
 .check[data-state='min']  { background: var(--rouge-soft); border-color: var(--rouge); color: var(--rouge); }
+.check[data-state='miss'] { border-style: dashed; border-color: var(--muted); color: var(--muted); }
+.check[data-state='rest'] { border-style: dotted; border-color: var(--rouge); color: var(--rouge); }
 
 .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 6rem); }
 
 @keyframes sheet-in { from { transform: translateY(100%); } to { transform: none; } }
 .sheet-in { animation: sheet-in .22s ease-out; }
+@keyframes pulse-dot { 50% { opacity: .35; } }
+.pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
 @keyframes fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: fade-in .25s ease-out; }
 

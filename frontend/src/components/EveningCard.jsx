@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ChevronDown, Minus, Moon, Plus } from 'lucide-react';
+import { ChevronDown, Moon } from 'lucide-react';
 import { useSave } from '../hooks/useData';
 import { useUserDomains } from '../hooks/useLife';
 import { toast } from './toast';
 import { Field, Textarea } from './ui';
 
 /**
- * Bilan du soir, en 1 minute : eau, sucre et sel (si le domaine Corps est actif),
+ * Bilan du soir, en 1 minute : sucre et sel (si le domaine Corps est actif),
  * gratitude, victoire, leçon. Tout est facultatif et s'enregistre à la sortie du champ.
  */
 export default function EveningCard({ day, log }) {
@@ -21,7 +21,6 @@ export default function EveningCard({ day, log }) {
   const text = (k) => {
     if ((log?.[k] || '') !== v[k].trim()) patch({ [k]: v[k].trim() }, 'Enregistré ✓');
   };
-  const water = log?.water || 0;
   const tri = (field, label) => (
     <div className="flex items-center justify-between gap-2">
       <span className="text-sm font-semibold">{label}</span>
@@ -44,14 +43,6 @@ export default function EveningCard({ day, log }) {
         <div className="space-y-3 border-t border-line p-4">
           {body && (
             <>
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-semibold">Verres d'eau</span>
-                <div className="flex items-center gap-1">
-                  <button type="button" aria-label="Un verre de moins" className="chip min-h-11 min-w-11 justify-center" onClick={() => water > 0 && patch({ water: water - 1 })}><Minus className="h-4 w-4" /></button>
-                  <span className="w-8 text-center font-display text-xl font-extrabold num">{water}</span>
-                  <button type="button" aria-label="Un verre de plus" className="chip min-h-11 min-w-11 justify-center" onClick={() => water < 50 && patch({ water: water + 1 })}><Plus className="h-4 w-4" /></button>
-                </div>
-              </div>
               {tri('sugar_free', 'Sans sucre ajouté')}
               {tri('salt_free', 'Sans sel ni cube')}
             </>

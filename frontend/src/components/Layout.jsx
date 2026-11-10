@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import clsx from 'clsx';
-import { CalendarCheck, CircleHelp, Compass, Ellipsis, Map, NotebookPen } from 'lucide-react';
+import { BookOpen, CalendarRange, CircleHelp, Flame, HandHeart, LayoutGrid, Leaf, Settings, Sun } from 'lucide-react';
 import { GUIDE } from '../data/guide';
 import GuideSection from './GuideSection';
 import { IconButton, Sheet } from './ui';
-import Capture from './Capture';
+import QuickAdd from './QuickAdd';
 
 const NAV = [
-  { to: '/', label: "Aujourd'hui", icon: CalendarCheck, end: true },
-  { to: '/parcours', label: 'Parcours', icon: Map },
-  { to: '/roue', label: 'Roue', icon: Compass },
-  { to: '/journal', label: 'Journal', icon: NotebookPen },
-  { to: '/plus', label: 'Plus', icon: Ellipsis },
+  { to: '/', label: 'Jour', icon: Sun, end: true },
+  { to: '/semaine', label: 'Semaine', icon: CalendarRange },
+  { to: '/esprit', label: 'Esprit', icon: Flame },
+  { to: '/service', label: 'Service', icon: HandHeart },
+  { to: '/corps', label: 'Corps', icon: Leaf },
+  { to: '/etudes', label: 'Études', icon: BookOpen },
+];
+const MORE = [
+  { to: '/plus', label: 'Plus', icon: LayoutGrid },
+  { to: '/guide', label: 'Guide', icon: CircleHelp },
+  { to: '/reglages', label: 'Réglages', icon: Settings },
 ];
 
 export default function Layout() {
@@ -22,7 +28,7 @@ export default function Layout() {
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-line md:flex">
         <Link to="/" className="px-5 py-6 font-display text-3xl font-extrabold tracking-tight text-rouge">Davina</Link>
         <nav className="flex-1 space-y-1 px-3">
-          {NAV.map((n) => (
+          {[...NAV, ...MORE].map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
@@ -40,23 +46,23 @@ export default function Layout() {
       </aside>
 
       <div className="min-w-0 flex-1">
-        <main className="safe-bottom mx-auto w-full max-w-2xl px-4 pt-[calc(env(safe-area-inset-top)+1rem)] md:px-8 md:pb-24 md:pt-8">
+        <main className="safe-bottom mx-auto w-full max-w-3xl px-4 lg:max-w-5xl pt-[calc(env(safe-area-inset-top)+1rem)] md:px-8 md:pb-24 md:pt-8">
           <Outlet />
         </main>
       </div>
 
-      <Capture />
+      <QuickAdd />
 
       {/* Mobile : barre du bas */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper pb-[env(safe-area-inset-bottom)] md:hidden">
-        <div className="grid grid-cols-5">
+      <nav data-tour="barre" className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper pb-[env(safe-area-inset-bottom)] md:hidden">
+        <div className="grid grid-cols-6">
           {NAV.map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
               end={n.end}
               className={({ isActive }) => clsx(
-                'flex min-h-14 flex-col items-center justify-center gap-0.5 border-t-[3px] text-[0.7rem] font-semibold',
+                'flex min-h-14 flex-col items-center justify-center gap-0.5 border-t-[3px] text-[0.65rem] font-semibold',
                 isActive ? 'border-rouge text-rouge' : 'border-transparent text-muted',
               )}
             >

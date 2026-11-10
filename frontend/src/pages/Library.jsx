@@ -33,7 +33,7 @@ export default function Library() {
 
   return (
     <>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
+      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Menu</Link>
       <PageHeader title="Mes lectures" sub="Lire peu, mais en profondeur : une fiche de synthèse par livre." action={<Button size="sm" icon={Plus} onClick={() => setOpen(true)}>Ajouter</Button>} />
 
       {books.length === 0 && <Empty title="Ta bibliothèque est vide" action={<Button icon={Plus} onClick={() => setOpen(true)}>Ajouter un livre</Button>}>Ajoute le livre que tu lis en ce moment, ou pars d'une idée ci-dessous.</Empty>}

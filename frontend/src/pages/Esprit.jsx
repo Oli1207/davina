@@ -13,7 +13,7 @@ import { toast } from '../components/toast';
 import { Button, Card, Chips, Empty, Field, IconButton, Input, SectionTitle, Select, Sheet, Stat, Tabs, Textarea } from '../components/ui';
 import { PageHeader } from '../components/Layout';
 
-const TABS = [['meditation', 'Méditation'], ['priere', 'Prière'], ['jeune', 'Jeûne'], ['versets', 'Versets'], ['intercession', 'Intercession']];
+const TABS = [['meditation', 'Méditation'], ['priere', 'Prière'], ['jeune', 'Jeûne'], ['versets', 'Versets']];
 
 export default function Esprit() {
   const [params, setParams] = useSearchParams();
@@ -22,8 +22,7 @@ export default function Esprit() {
   const { data: checks = [] } = useRecentChecks();
   return (
     <div>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
-      <PageHeader kicker="Intimité avec Dieu" title="Esprit" sub="Méditer, prier, jeûner, retenir, intercéder." />
+      <PageHeader kicker="Intimité avec Dieu" title="Esprit" sub="Méditer, prier, jeûner, retenir." />
       {habits.length > 0 && (
         <div className="mb-4 grid grid-cols-2 gap-3">
           {habits.map((h) => {
@@ -44,7 +43,6 @@ export default function Esprit() {
         {tab === 'priere' && <Prayer />}
         {tab === 'jeune' && <Fasting />}
         {tab === 'versets' && <Verses />}
-        {tab === 'intercession' && <Intercession />}
       </div>
     </div>
   );
@@ -453,7 +451,7 @@ function todaysList(targets) {
   return [...base, ...forgotten.map((t) => ({ ...t, forgotten: true }))];
 }
 
-function Intercession() {
+export function Intercession() {
   const { data: targets = [] } = useRows('intercession_targets', { build: (q) => q.eq('active', true).order('name') });
   const save = useSave('intercession_targets');
   const remove = useRemove('intercession_targets');

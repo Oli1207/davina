@@ -28,7 +28,6 @@ export default function Corps() {
   const tab = params.get('onglet') || 'seances';
   return (
     <div>
-      <Link to="/plus" className="-ml-2 mb-1 inline-flex min-h-11 items-center gap-1 px-2 text-sm font-semibold text-muted"><ChevronLeft className="h-4 w-4" />Plus</Link>
       <PageHeader kicker="Santé physique" title="Corps" sub="Bouger, manger simple, couper le sucre et le sel. Prendre soin de moi." />
       <Tabs tabs={[['seances', 'Séances'], ['sucre', 'Sucre & sel'], ['repas', 'Repas'], ['poids', 'Poids']]} value={tab} onChange={(v) => setParams({ onglet: v }, { replace: true })} />
       <div className="mt-5">

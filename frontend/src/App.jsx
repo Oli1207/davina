@@ -14,23 +14,19 @@ import Onboarding from './pages/Onboarding';
 import Today from './pages/Today';
 
 // Les écrans secondaires se chargent à la demande : « Aujourd'hui » s'ouvre vite.
-const Wheel = lazy(() => import('./pages/Wheel'));
 const DomainPage = lazy(() => import('./pages/DomainPage'));
-const Journeys = lazy(() => import('./pages/Journeys'));
 const JourneyPage = lazy(() => import('./pages/JourneyPage'));
 const Progress = lazy(() => import('./pages/Progress'));
 const More = lazy(() => import('./pages/More'));
 const Library = lazy(() => import('./pages/Library'));
 const BookPage = lazy(() => import('./pages/BookPage'));
 const Guide = lazy(() => import('./pages/Guide'));
+const Service = lazy(() => import('./pages/Service'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const Etudes = lazy(() => import('./pages/Etudes'));
 const Corps = lazy(() => import('./pages/Corps'));
 const Esprit = lazy(() => import('./pages/Esprit'));
 const Cards = lazy(() => import('./pages/Cards'));
-const Terrain = lazy(() => import('./pages/Terrain'));
-const Circle = lazy(() => import('./pages/Circle'));
-const Impact = lazy(() => import('./pages/Impact'));
 const Journal = lazy(() => import('./pages/Journal'));
 const Week = lazy(() => import('./pages/Week'));
 const Pair = lazy(() => import('./pages/Pair'));
@@ -56,7 +52,7 @@ function Signed() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Today />} />
-          <Route path="parcours" element={<Journeys />} />
+          <Route path="parcours" element={<Navigate to="/semaine?onglet=parcours" replace />} />
           <Route path="parcours/:id" element={<JourneyPage />} />
           <Route path="lecture" element={<Library />} />
           <Route path="lecture/:id" element={<BookPage />} />
@@ -66,12 +62,13 @@ function Signed() {
           <Route path="corps" element={<Corps />} />
           <Route path="esprit" element={<Esprit />} />
           <Route path="revision" element={<Cards />} />
-          <Route path="terrain" element={<Terrain />} />
-          <Route path="cercle" element={<Circle />} />
-          <Route path="impact" element={<Impact />} />
           <Route path="chemin" element={<Progress />} />
           <Route path="plus" element={<More />} />
-          <Route path="roue" element={<Wheel />} />
+          <Route path="roue" element={<Navigate to="/semaine?onglet=roue" replace />} />
+          <Route path="service" element={<Service />} />
+          <Route path="terrain" element={<Navigate to="/service?onglet=terrain" replace />} />
+          <Route path="cercle" element={<Navigate to="/service?onglet=cercle" replace />} />
+          <Route path="impact" element={<Navigate to="/service?onglet=impact" replace />} />
           <Route path="domaine/:key" element={<DomainPage />} />
           <Route path="journal" element={<Journal />} />
           <Route path="semaine" element={<Week />} />

@@ -5,13 +5,13 @@ import { useJourneys, useStartJourney } from '../hooks/useJourneys';
 import { TEMPLATES } from '../data/journeys';
 import { DOMAIN } from '../data/domains';
 import { longDate, shortDate, today } from '../lib/dates';
-import { PageHeader } from '../components/Layout';
+import Head from '../components/Head';
 import { toast } from '../components/toast';
 import { Button, Empty, ErrorNote, Field, Input, Loading, Sheet } from '../components/ui';
 
 const range = (j) => `${shortDate(j.starts_on)} ${j.starts_on.slice(0, 4)}${j.ends_on ? ` → ${shortDate(j.ends_on)} ${j.ends_on.slice(0, 4)}` : ''}`;
 
-export default function Journeys() {
+export default function Journeys({ embedded }) {
   const { data: journeys = [], isLoading } = useJourneys();
   const [open, setOpen] = useState(false);
   const groups = [
@@ -23,7 +23,7 @@ export default function Journeys() {
   if (isLoading) return <Loading />;
   return (
     <>
-      <PageHeader
+      <Head embedded={embedded} back={null}
         help="parcours"
         title="Mes parcours"
         sub="Des chapitres de vie, avec des étapes et des livrables. Tu peux en mener plusieurs, et les enchaîner toute ta vie."
